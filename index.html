@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="calculo.css">
+    <title>Cálculo de notas</title>
+
+</head>
+
+<body>
+
+    <div class="head">
+        <div class="first-title">Quer saber quanto falta no exame?</div>
+        <h2 class="second-title">Calcule suas notas!</h2>
+    </div>
+
+    <form submit='calcularMedia(event)'>
+
+        <div class="container">
+            <div class="row">
+                <div class="title-input col-md">
+                    <input type="number" id="primeiroT" class='ripplelink' required>
+                    <h3>Nota do 1º trimestre</h3>
+
+                    <span class="line"></span>
+                </div>
+
+                <div class="title-input col-md">
+                    <input type="number" id="segundoT" class='ripplelink' required>
+                    <h3>Nota do 2º trimestre</h3>
+
+                    <span class="line"></span>
+                </div>
+
+                <div class="title-input col-md">
+                    <input type="number" id="terceiroT" class='ripplelink' required>
+                    <h3>Nota do 3º trimestre</h3>
+
+                    <span class="line"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <div class="submit btn btn-primary btn-lg" onclick="calcularMedia(event)">Calcular!</div>
+        </div>
+
+
+    </form>
+
+    <div id="resultado-container">
+        <div id="resultado">
+
+            <div class="result-title">Sua situação é: </div>
+            <div id="situacao"></div>
+            <span>Média: </span><span id="media"></span>
+            <div class="exame-group">
+                <span class="notaExame">Nota necessária:</span>
+                <span id="exame"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script type="text/javascript">
+        function checkFilled() {
+            var notFilled = 0
+            $('input').each(function () {
+                if ($(this).val() == '') {
+                    notFilled++
+                }
+            })
+            if (notFilled != 0) {
+                alert('Preencha todas as notas')
+                return false
+            } else {
+                return true
+            }
+        }
+
+        function checkNumbers() {
+            $('input').keyup(function () {
+
+                if ($(this).val() > 10 || $(this).val() < 0) {
+                    alert('Insira sua média de 1 a 10!')
+                }
+            })
+
+            $('input').click(function () {
+                if ($(this).val() > 10 || $(this).val() < 0) {
+                    alert('Insira sua média de 1 a 10!')
+                }
+            })
+        }
+
+        function calcularMedia(event) {
+
+            event.preventDefault()
+
+            if (checkFilled()) {
+                var situacao
+
+                var n1 = parseFloat($('#primeiroT').val())
+                var n2 = parseFloat($('#segundoT').val())
+                var n3 = parseFloat($('#terceiroT').val())
+
+
+                var media = ((n1 + n2 + n3) / 3).toFixed(1)
+                $('#media').html(media)
+                if (media >= 7) {
+
+                    $('#resultado').addClass('bgAprovado')
+                    situacao = "Aprovado"
+                }
+                if (media < 1.67) {
+
+                    $('#resultado').addClass('bgReprovado')
+                    situacao = "Reprovado"
+
+                }
+
+                if (media < 7 && media > 1.67) {
+                    situacao = "Exame"
+                    $('#situacao').show()
+                    $('#resultado').addClass('bgExame')
+
+                    var notaExame = ((5 - (media * 0.6)) / 0.4).toFixed(1)
+                    $('.notaExame').show()
+                    $('#exame').show()
+                    $('#exame').html(notaExame)
+                }
+
+                mostraResultado(situacao, notaExame)
+            }
+        }
+
+        window.addEventListener('mouseup', function (event) {
+            let resultado = document.getElementById('resultado')
+            if (event.target != resultado && event.target.parentNode != resultado) {
+                $('#resultado-container').hide()
+            }
+        })
+
+        function mostraResultado(s, exame) {
+            $('#resultado-container').css('display', 'block')
+            $('#situacao').html(s)
+
+        }
+
+        $(function () {
+
+            checkNumbers()
+
+
+        })
+    </script>
+
+
+
+</body>
+
+</html>

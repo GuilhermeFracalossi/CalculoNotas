@@ -1,0 +1,226 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background-color: #1c2024;
+}
+
+.container {
+    margin-bottom: 50px;
+}
+
+.head {
+    text-align: center;
+    height: 40vh;
+    background-image: url('gradientebg.svg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    padding: 50px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+
+}
+
+.head .first-title {
+    color: white;
+    font-size: 30px;
+
+}
+
+.head .second-title {
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+
+}
+
+
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+#resultado-container {
+    position: fixed;
+    top: 25vh;
+    display: none;
+    width: 500px;
+    height: 200px;
+    width: 80vw;
+    left: 50%;
+    margin-left: -40vw;
+
+}
+
+
+
+
+
+
+.title-input {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-left: 20px;
+    margin-top: 60px;
+
+}
+
+.title-input h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f2f2f2;
+    position: absolute;
+    top: 0;
+
+
+}
+
+
+
+.title-input input {
+    border: none;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    background-color: rgba(43, 43, 43, 0);
+    padding: 9px 10px 9px 10px;
+    color: #f8f8f8;
+    outline: none;
+    margin-top: 30px;
+    font-size: 30px;
+    background-position: center;
+    transition: background 0.4s cubic-bezier(.04, .38, .83, .8);
+
+}
+
+.line {
+
+    position: relative;
+    display: block;
+}
+
+.line::before,
+.line::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    bottom: 0;
+    height: 3px;
+    background-color: #21abe5;
+    transition: 0.3s ease-in-out;
+}
+
+.line::before {
+    left: 50%;
+
+}
+
+.line::after {
+    right: 50%;
+}
+
+input:focus~.line::before,
+input:focus~.line::after {
+    width: 50%;
+}
+
+input:valid~.line::before,
+input:valid~.line::after {
+    width: 50%;
+}
+
+input:focus~h3,
+input:valid~h3 {
+    color: #21abe5;
+}
+
+input:hover {
+    background: rgba(43, 43, 43, 0) radial-gradient(circle, transparent 1%, #888888 1%) center/15000%;
+}
+
+
+input:active {
+
+    background-size: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: background 0s;
+}
+
+
+.submit {
+    text-align: center;
+    margin: auto;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#resultado {
+
+    background-color: white;
+    height: auto;
+
+    border-radius: 5px;
+    text-align: center;
+    margin: 0px;
+
+    padding: 40px 40px 80px 40px;
+}
+
+#resultado span {
+    color: white;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.result-title {
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 1.4vh;
+    margin-bottom: 1.8vh;
+    color: #212121;
+
+}
+
+#situacao {
+    font-size: 55px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+.notaExame {
+    display: none;
+    font-size: 35px;
+
+    color: white;
+}
+
+#exame {
+
+    color: white;
+    display: none;
+}
+
+
+.bgAprovado {
+    background: rgb(0, 255, 98);
+    background: linear-gradient(142deg, rgb(222, 255, 235) 0%, rgb(51, 244, 86) 65%)
+}
+
+.bgReprovado {
+    background: linear-gradient(142deg, rgba(255, 255, 255, 1) 0%, rgba(255, 40, 36, 1) 65%);
+}
+
+.bgExame {
+    background: linear-gradient(142deg, rgba(255, 255, 255, 1) 0%, rgba(255, 146, 36, 1) 65%);
+}
